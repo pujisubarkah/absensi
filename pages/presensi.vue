@@ -9,11 +9,23 @@ const organization = ref('')
 
 const sigPad = ref(null)
 const canvasRef = ref(null)
+const showDownloadButton = ref(false)
+const instansiList = ref([])
 
 onMounted(async () => {
   sigPad.value = new SignaturePad(canvasRef.value, {
     backgroundColor: '#fff'
   })
+
+  // Fetch instansi data
+  try {
+    const { data } = await $fetch('/api/instansi')
+    if (data) {
+      instansiList.value = data
+    }
+  } catch (error) {
+    console.error('Failed to fetch instansi data:', error)
+  }
 })
 
 const resetSignature = () => {
@@ -47,6 +59,7 @@ const submitForm = async () => {
   }
 
   alert(`Terima kasih ${name.value} dari ${organization.value} telah mengisi daftar hadir`)
+  showDownloadButton.value = true
   
   name.value = ''
   email.value = ''
@@ -62,9 +75,8 @@ const submitForm = async () => {
       <div class="text-center mb-6">
         <div class="flex justify-center items-center space-x-4 mb-4">
           <img src="/lanri_.png" alt="LAN RI" class="h-12 w-auto object-contain" />
-          <img src="/ikk_logo.png" alt="IKK" class="h-12 w-auto object-contain" />
         </div>
-        <h1 class="text-3xl font-bold text-[#16578d] mb-2">Form Presensi IKK Award</h1>
+        <h1 class="text-3xl font-bold text-[#16578d] mb-2">Form Presensi Download Buku Inovasi</h1>
         <p class="text-gray-600">Silakan isi data dan tanda tangan di bawah</p>
       </div>
 
@@ -107,10 +119,18 @@ const submitForm = async () => {
           <input
             v-model="organization"
             type="text"
-            placeholder="Masukkan nama instansi"
+            list="instansi-list"
+            placeholder="Ketik nama instansi/organisasi"
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16578d] focus:border-[#16578d] transition duration-200"
             required
           />
+          <datalist id="instansi-list">
+            <option
+              v-for="instansi in instansiList"
+              :key="instansi.id"
+              :value="instansi.namaInstansi"
+            />
+          </datalist>
         </div>
 
         <!-- Signature Pad -->
@@ -139,6 +159,16 @@ const submitForm = async () => {
           Submit Presensi
         </button>
       </form>
+
+        <div v-if="showDownloadButton" class="mt-6 text-center">
+          <a
+            href="https://drive.google.com/drive/folders/1uLXPNoXcAQQnWosBUajVpqiUhw1FlgJX"
+            target="_blank"
+            class="inline-block bg-green-600 text-white py-3 px-6 rounded-lg font-bold text-lg hover:bg-green-700 transition duration-200 shadow-md"
+          >
+            Download Buku Inovasi
+          </a>
+        </div>
     </div>
   </div>
 </template>
