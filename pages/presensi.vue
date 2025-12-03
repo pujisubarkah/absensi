@@ -76,7 +76,7 @@ const submitForm = async () => {
         <div class="flex justify-center items-center space-x-4 mb-4">
           <img src="/lanri_.png" alt="LAN RI" class="h-12 w-auto object-contain" />
         </div>
-        <h1 class="text-3xl font-bold text-[#16578d] mb-2">Form Presensi Download Buku Inovasi</h1>
+        <h1 class="text-3xl font-bold text-[#16578d] mb-2">Form Penerima Buku Advokasi Inovasi</h1>
         <p class="text-gray-600">Silakan isi data dan tanda tangan di bawah</p>
       </div>
 
@@ -156,7 +156,7 @@ const submitForm = async () => {
           type="submit"
           class="w-full bg-[#16578d] text-white py-3 px-6 rounded-lg font-bold text-lg hover:bg-blue-700 transition duration-200 shadow-md"
         >
-          Submit Presensi
+          Submit 
         </button>
       </form>
 

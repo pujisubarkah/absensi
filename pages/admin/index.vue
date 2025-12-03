@@ -3,7 +3,7 @@
     <div class="flex justify-center items-center space-x-4 mb-6">
       <img src="/lanri_.png" alt="LAN RI" class="h-12 w-auto object-contain" />
     </div>
-    <h1 class="text-3xl font-bold text-[#16578d] text-center mb-6">Daftar Presensi Event</h1>
+    <h1 class="text-3xl font-bold text-[#16578d] text-center mb-6">Daftar Penerima Buku Advokasi Inovasi</h1>
 
     <div class="mb-4 text-right">
       <ClientOnly>
