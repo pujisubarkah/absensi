@@ -10,22 +10,11 @@ const organization = ref('')
 const sigPad = ref(null)
 const canvasRef = ref(null)
 const showDownloadButton = ref(false)
-const instansiList = ref([])
 
-onMounted(async () => {
+onMounted(() => {
   sigPad.value = new SignaturePad(canvasRef.value, {
     backgroundColor: '#fff'
   })
-
-  // Fetch instansi data
-  try {
-    const { data } = await $fetch('/api/instansi')
-    if (data) {
-      instansiList.value = data
-    }
-  } catch (error) {
-    console.error('Failed to fetch instansi data:', error)
-  }
 })
 
 const resetSignature = () => {
@@ -119,18 +108,10 @@ const submitForm = async () => {
           <input
             v-model="organization"
             type="text"
-            list="instansi-list"
-            placeholder="Ketik nama instansi/organisasi"
+            placeholder="Nama instansi/organisasi & daerah asal"
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16578d] focus:border-[#16578d] transition duration-200"
             required
           />
-          <datalist id="instansi-list">
-            <option
-              v-for="instansi in instansiList"
-              :key="instansi.id"
-              :value="instansi.namaInstansi"
-            />
-          </datalist>
         </div>
 
         <!-- Signature Pad -->
